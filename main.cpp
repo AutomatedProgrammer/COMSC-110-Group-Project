@@ -129,7 +129,7 @@ double calculatorPlus(int a, int b, int c)
 	  double total;
 
 	  total = (-b + sqrt((pow(b,2)) - (4 * a * c))) / (2*a);
-	  cout << "x = " << total << endl;
+
 	  return total;
 }
 
@@ -138,7 +138,7 @@ double calculatorMinus(int a, int b, int c)
 	  double total;
 
 	  total = (-b - sqrt((pow(b,2)) - (4 * a * c))) / (2*a);
-	  cout << "x = " << total << endl;
+
 	  return total;
 }
 
@@ -371,6 +371,7 @@ bool readFile(string filename, array<int, 5>& a_array, array<int, 5>& b_array, a
 	cout << "Enter filename:";
 	cin >> filename;
 	inputFile.open(filename);
+	outputFile.open("output.txt");
 	if (!inputFile)
 	{
 		cout << "Error no file shutting down...";
@@ -381,6 +382,7 @@ bool readFile(string filename, array<int, 5>& a_array, array<int, 5>& b_array, a
 		ss.str(string());
 		ss.clear();
 		cout << equation << endl;
+		outputFile << equation << endl;
 		ss << equation;
 
 
@@ -391,46 +393,55 @@ bool readFile(string filename, array<int, 5>& a_array, array<int, 5>& b_array, a
 			if (terms2 != "+" && terms2 != "-")
 			{
 				cout << "Error! Refusing to read equation due to incorrect format...\n";
+				outputFile << "Error! Refusing to read equation due to incorrect format...\n";
 				continue;
 			}
 			if (terms4 != "+" && terms4 != "-")
 			{
 				cout << "Error! Refusing to read equation due to incorrect format...\n";
+				outputFile << "Error! Refusing to read equation due to incorrect format...\n";
 				continue;
 			}
 			if (terms5 != "=")
 			{
 				cout << "Error! Refusing to read equation due to incorrect format...\n";
+				outputFile << "Error! Refusing to read equation due to incorrect format...\n";
 				continue;
 			}
 			if (terms1 != "x^2")
 			{
 				cout << "Error! Refusing to read equation due to incorrect format...\n";
+				outputFile << "Error! Refusing to read equation due to incorrect format...\n";
 				continue;
 			}
 			if (terms3 != "x")
 			{
 				cout << "Error! Refusing to read equation due to incorrect format...\n";
+				outputFile << "Error! Refusing to read equation due to incorrect format...\n";
 				continue;
 			}
 			if (temp0 != 0)
 			{
 				cout << "Error! Refusing to read equation due to incorrect format...\n";
+				outputFile << "Error! Refusing to read equation due to incorrect format...\n";
 				continue;
 			}
 			if (terms6 != "(")
 			{
 				cout << "Error! Refusing to read equation due to incorrect format...\n";
+				outputFile << "Error! Refusing to read equation due to incorrect format...\n";
 				continue;
 			}
 			if (terms7 != ",")
 			{
 				cout << "Error! Refusing to read equation due to incorrect format...\n";
+				outputFile << "Error! Refusing to read equation due to incorrect format...\n";
 				continue;
 			}
 			if (terms8 != ")")
 			{
 				cout << "Error! Refusing to read equation due to incorrect format...\n";
+				outputFile << "Error! Refusing to read equation due to incorrect format...\n";
 				continue;
 			}
 
@@ -456,6 +467,15 @@ bool readFile(string filename, array<int, 5>& a_array, array<int, 5>& b_array, a
 		cout << "x: " << solution1 << endl;
 		cout << "x: " << solution2 << endl;
 		cout << endl;
+
+		outputFile << "Numbers\n";
+		outputFile << "a: " << a << endl;
+		outputFile << "b: " << b << endl;
+		outputFile << "c: " << c << endl;
+		outputFile << "Solutions\n";
+		outputFile << "x: " << solution1 << endl;
+		outputFile << "x: " << solution2 << endl;
+		outputFile << endl;
 
 	}
 
