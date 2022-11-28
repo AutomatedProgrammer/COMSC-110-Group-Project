@@ -14,21 +14,21 @@ void run(sf::RenderWindow&, const sf::VertexArray&, const sf::VertexArray&, cons
 //this run function below is an overloaded debug function to see if the grid even renders
 void run(sf::RenderWindow&, const sf::VertexArray&, const sf::VertexArray&, const sf::VertexArray&, const sf::VertexArray&, const sf::VertexArray&);
 
-double calculatorPlus(int, int, int); //Quadratic calculator
-double calculatorMinus(int, int, int); //Quadratic calculator
-double calculateY(int, int, int, int); //Used to calculate the y coordinate for graphing
-sf::VertexArray setPoints(const array<int, 5>&, const array<int, 5>&, const array<int, 5>&, const array<int, 5>&, const array<int, 5>&, int);
+double calculatorPlus(double, double, double); //Quadratic calculator
+double calculatorMinus(double, double, double); //Quadratic calculator
+double calculateY(double, double, double, double); //Used to calculate the y coordinate for graphing
+sf::VertexArray setPoints(const array<double, 5>&, const array<double, 5>&, const array<double, 5>&, const array<double, 5>&, const array<double, 5>&, int);
 sf::VertexArray setPoints(int); //Sets up vertex arrays to graph (This one's for the grid)
-bool readFile(string, array<int, 5>&, array<int, 5>&, array<int, 5>&, array<int, 5>&, array<int, 5>&);
+bool readFile(string, array<double, 5>&, array<double, 5>&, array<double, 5>&, array<double, 5>&, array<double, 5>&);
 
 
 
 int main() {
-	array<int, 5> a_array = {0, 0, 0, 0, 0};
-	array<int, 5> b_array = {0, 0, 0, 0, 0};
-	array<int, 5> c_array = {0, 0, 0, 0, 0};
-	array<int, 5> b_domain_array = {0, 0, 0, 0, 0};
-	array<int, 5> e_domain_array = {0, 0, 0, 0, 0};
+	array<double, 5> a_array = {0, 0, 0, 0, 0};
+	array<double, 5> b_array = {0, 0, 0, 0, 0};
+	array<double, 5> c_array = {0, 0, 0, 0, 0};
+	array<double, 5> b_domain_array = {0, 0, 0, 0, 0};
+	array<double, 5> e_domain_array = {0, 0, 0, 0, 0};
 	string filename("");
 
 	if (!readFile(filename, a_array, b_array, c_array, b_domain_array, e_domain_array))
@@ -124,7 +124,7 @@ void run(sf::RenderWindow& mWindow, const sf::VertexArray& graph, const sf::Vert
 	}
 }
 
-double calculatorPlus(int a, int b, int c)
+double calculatorPlus(double a, double b, double c)
 {
 	  double total;
 
@@ -133,7 +133,7 @@ double calculatorPlus(int a, int b, int c)
 	  return total;
 }
 
-double calculatorMinus(int a, int b, int c)
+double calculatorMinus(double a, double b, double c)
 {
 	  double total;
 
@@ -142,9 +142,9 @@ double calculatorMinus(int a, int b, int c)
 	  return total;
 }
 
-double calculateY(int a, int b, int c, int x)
+double calculateY(double a, double b, double c, double x)
 {
-	return -(a * pow(x, 2)) + (b*x)+ c;
+	return -((a * pow(x, 2)) + (b*x)+ c);
 }
 
 sf::VertexArray setPoints(int type) //0 is the red graph lines, 1 is linesx, 2 is linesx2, 3 is linesy, 4 is linesy2
@@ -268,16 +268,16 @@ sf::VertexArray setPoints(int type) //0 is the red graph lines, 1 is linesx, 2 i
 	}
 }
 
-sf::VertexArray setPoints(const array<int, 5>& a_array, const array<int, 5>& b_array, const array<int, 5>& c_array, const array<int, 5>& b_domain_array, const array<int, 5>& e_domain_array, int count)
+sf::VertexArray setPoints(const array<double, 5>& a_array, const array<double, 5>& b_array, const array<double, 5>& c_array, const array<double, 5>& b_domain_array, const array<double, 5>& e_domain_array, int count)
 {
-	int a = 0, b = 0, c = 0;
-	int start_x = 0.0f;
-	int end_x = 0.0f;
-	float domain = 0.0f;
+	double a = 0, b = 0, c = 0;
+	double start_x = 0.0f;
+	double end_x = 0.0f;
+	double domain = 0.0f;
 	start_x = b_domain_array[count];
 	end_x = e_domain_array[count];
 	domain = abs(end_x-start_x);
-	sf::VertexArray points(sf::LineStrip, domain+1);
+	sf::VertexArray points(sf::LineStrip, (domain*10)+1);
 	a = a_array[count];
 	b = b_array[count];
 	c = c_array[count];
@@ -285,10 +285,10 @@ sf::VertexArray setPoints(const array<int, 5>& a_array, const array<int, 5>& b_a
 	{
 	case 0:
 	{
-	    for (int counter = 0; counter <= domain; counter++)
+	    for (double counter = 0; counter <= (domain*10); counter++)
 	    {
 	    	double x = 0, y = 0;
-	    	x = static_cast<double>(start_x + counter);
+	    	x = static_cast<double>(start_x + (counter/10));
 	    	y = calculateY(a, b, c, x);
 	    	points[counter].position = sf::Vector2f(x+150.0f, y+150.0f);
 	    	points[counter].color = sf::Color::Black;
@@ -298,10 +298,10 @@ sf::VertexArray setPoints(const array<int, 5>& a_array, const array<int, 5>& b_a
 	}
 	case 1:
 	{
-	    for (int counter = 0; counter <= domain; counter++)
+	    for (double counter = 0; counter <= (domain*10); counter++)
 	    {
 	    	double x = 0, y = 0;
-	    	x = static_cast<double>(start_x + counter);
+	    	x = static_cast<double>(start_x + (counter/10));
 	    	y = calculateY(a, b, c, x);
 	    	points[counter].position = sf::Vector2f(x+150.0f, y+150.0f);
 	    	points[counter].color = sf::Color::Red;
@@ -311,10 +311,10 @@ sf::VertexArray setPoints(const array<int, 5>& a_array, const array<int, 5>& b_a
 	}
 	case 2:
 	{
-	    for (int counter = 0; counter <= domain; counter++)
+	    for (double counter = 0; counter <= (domain*10); counter++)
 	    {
 	    	double x = 0, y = 0;
-	    	x = static_cast<double>(start_x + counter);
+	    	x = static_cast<double>(start_x + (counter/10));
 	    	y = calculateY(a, b, c, x);
 	    	points[counter].position = sf::Vector2f(x+150.0f, y+150.0f);
 	    	points[counter].color = sf::Color::Blue;
@@ -324,10 +324,10 @@ sf::VertexArray setPoints(const array<int, 5>& a_array, const array<int, 5>& b_a
 	}
 	case 3:
 	{
-	    for (int counter = 0; counter <= domain; counter++)
+	    for (double counter = 0; counter <= (domain*10); counter++)
 	    {
 	    	double x = 0, y = 0;
-	    	x = static_cast<double>(start_x + counter);
+	    	x = static_cast<double>(start_x + (counter/10));
 	    	y = calculateY(a, b, c, x);
 	    	points[counter].position = sf::Vector2f(x+150.0f, y+150.0f);
 	    	points[counter].color = sf::Color::Green;
@@ -337,10 +337,10 @@ sf::VertexArray setPoints(const array<int, 5>& a_array, const array<int, 5>& b_a
 	}
 	case 4:
 	{
-	    for (int counter = 0; counter <= domain; counter++)
+	    for (double counter = 0; counter <= (domain*10); counter++)
 	    {
 	    	double x = 0, y = 0;
-	    	x = static_cast<double>(start_x + counter);
+	    	x = static_cast<double>(start_x + (counter/10));
 	    	y = calculateY(a, b, c, x);
 	    	points[counter].position = sf::Vector2f(x+150.0f, y+150.0f);
 	    	points[counter].color = sf::Color::Magenta;
@@ -352,7 +352,7 @@ sf::VertexArray setPoints(const array<int, 5>& a_array, const array<int, 5>& b_a
 
 }
 
-bool readFile(string filename, array<int, 5>& a_array, array<int, 5>& b_array, array<int, 5>& c_array, array<int, 5>& b_domain_array, array<int, 5>& e_domain_array)
+bool readFile(string filename, array<double, 5>& a_array, array<double, 5>& b_array, array<double, 5>& c_array, array<double, 5>& b_domain_array, array<double, 5>& e_domain_array)
 {
 	ifstream inputFile;
 	ofstream outputFile;
@@ -360,12 +360,12 @@ bool readFile(string filename, array<int, 5>& a_array, array<int, 5>& b_array, a
 	int count = 0;
 
 	string terms1, terms2, terms3, terms4, terms5, terms6, terms7, terms8;
-	int tempa, tempb, tempc, temp0, b_domain, e_domain;
+	double tempa, tempb, tempc, temp0, b_domain, e_domain;
 
 	stringstream ss;
-	int a = 0;
-	int b = 0;
-	int c = 0;
+	double a = 0;
+	double b = 0;
+	double c = 0;
 	double solution1, solution2;
 
 	cout << "Enter filename:";
