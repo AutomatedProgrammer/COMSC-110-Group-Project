@@ -379,6 +379,11 @@ bool readFile(string filename, array<int, 5>& a_array, array<int, 5>& b_array, a
 	}
 	while(getline(inputFile, equation))
 	{
+		if (count > 4)
+		{
+			cout << "Not reading more than 5 equations...\n";
+			break;
+		}
 		ss.str(string());
 		ss.clear();
 		cout << equation << endl;
@@ -456,7 +461,8 @@ bool readFile(string filename, array<int, 5>& a_array, array<int, 5>& b_array, a
 			e_domain_array[count] = e_domain;
 
 		}
-		count++;
+
+
 		solution1 = calculatorPlus(a,b,c);
 		solution2 = calculatorMinus(a,b,c);
 		cout << "Numbers\n";
@@ -476,6 +482,7 @@ bool readFile(string filename, array<int, 5>& a_array, array<int, 5>& b_array, a
 		outputFile << "x: " << solution1 << endl;
 		outputFile << "x: " << solution2 << endl;
 		outputFile << endl;
+		count++;
 
 	}
 
