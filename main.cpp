@@ -33,7 +33,8 @@ int main() {
 
     if (!readFile(filename, a_array, b_array, c_array, b_domain_array, e_domain_array))
     {
-        system("pause");
+        cin.ignore();
+        cin.get();
         return 1;
     }
 
@@ -405,7 +406,8 @@ bool readFile(string filename, array<double, 5>& a_array, array<double, 5>& b_ar
     outputFile.open("output.txt");
     if (!inputFile)
     {
-        cout << "Error no file shutting down...\n";
+        cout << "Error no file shutting down.\n";
+        cout << "Press enter to continue...\n";
         return false;
     }
     while(getline(inputFile, equation)) //While loop to read each line(equation)
