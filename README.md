@@ -5,8 +5,13 @@ Uses a textfile as input and output. Equations are fed into the program with the
 Finished.
 
 File Format
+
 ax^2 + bx + c = 0 ( x1 , x2 )
+
 a, b, and c are coefficients.
+
 x1 and x2 are the beginning and end of the domain.
+
 The domain serves to tell the program where to start and end the graph.
+
 Domain is in interval notation for ease of programming.
