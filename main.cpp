@@ -390,15 +390,15 @@ bool readFile(string filename, array<double, 5>& a_array, array<double, 5>& b_ar
     string equation, temp; //string to store the equation, I think temp is a useless variable but i don't feel like changing it to find out
     int count = 0;
 
-    string terms1, terms2, terms3, terms4, terms5, terms6, terms7, terms8; //Tbh terms 1 is the only variable that needs to be a string as it is used to check x^2
+    string terms1 = "", terms2 = "", terms3 = "", terms4 = "", terms5 = "", terms6 = "", terms7 = "", terms8 = ""; //Tbh terms 1 is the only variable that needs to be a string as it is used to check x^2
     //the rest could be chars but I'm too lazy to change it at this point
-    double tempa, tempb, tempc, temp0, b_domain, e_domain; //Variables to dump into arrays, I think I could get rid of these but I'm pretty much done with this project at this point
+    double tempa = 1, tempb = 1, tempc = 1, temp0 = 0, b_domain = -2, e_domain = 2; //Variables to dump into arrays, I think I could get rid of these but I'm pretty much done with this project at this point
 
     stringstream ss; //Stringstream to break down the equation string into terms to dump into the arrays and check for file format
-    double a = 0;
-    double b = 0;
-    double c = 0;
-    double solution1, solution2;
+    double a = 1;
+    double b = 1;
+    double c = 1;
+    double solution1 = 0, solution2 = 0;
 
     cout << "Enter filename:";
     cin >> filename;
@@ -423,11 +423,19 @@ bool readFile(string filename, array<double, 5>& a_array, array<double, 5>& b_ar
         outputFile << equation << endl;
         ss << equation;
 
+        tempa = 1, tempb = 1, tempc = 1;
+        a = 1, b = 1, c = 1;
 
+        terms1 = "", terms2 = "", terms3 = "", terms4 = "", terms5 = "", terms6 = "", terms7 = "", terms8 = "";
         while (ss) { //Loops through the stringstream to break it down into seperate terms to put into variables, also serves as file format checking
             //the continues are there to skip the equation (break might work better but two lazy to change now)
             ss >> tempa >> terms1 >> terms2 >> tempb >> terms3 >> terms4 >> tempc >> terms5 >> temp0 >> terms6 >> b_domain >> terms7 >> e_domain >> terms8;
-
+            if (tempa == 0) //Note that if b is empty it will default b to a zero. 
+            {
+                cout << "Error! Refusing to read equation due to incorrect format...\n";
+                outputFile << "Error! Refusing to read equation due to incorrect format...\n";
+                continue;
+            }
             if (terms2 != "+" && terms2 != "-")
             {
                 cout << "Error! Refusing to read equation due to incorrect format...\n";
@@ -512,6 +520,7 @@ bool readFile(string filename, array<double, 5>& a_array, array<double, 5>& b_ar
             c_array[count] = c;
             b_domain_array[count] = b_domain;
             e_domain_array[count] = e_domain;
+
 
         }
 
