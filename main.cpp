@@ -430,7 +430,7 @@ bool readFile(string filename, array<double, 5>& a_array, array<double, 5>& b_ar
         while (ss) { //Loops through the stringstream to break it down into seperate terms to put into variables, also serves as file format checking
             //the continues are there to skip the equation (break might work better but two lazy to change now)
             ss >> tempa >> terms1 >> terms2 >> tempb >> terms3 >> terms4 >> tempc >> terms5 >> temp0 >> terms6 >> b_domain >> terms7 >> e_domain >> terms8;
-            if (tempa == 0) //Note that if b is empty it will default b to a zero. 
+            if (tempa == 0)  
             {
                 cout << "Error! Refusing to read equation due to incorrect format...\n";
                 outputFile << "Error! Refusing to read equation due to incorrect format...\n";
