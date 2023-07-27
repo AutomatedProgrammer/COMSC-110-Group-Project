@@ -15,3 +15,6 @@ x1 and x2 are the beginning and end of the domain.
 The domain serves to tell the program where to start and end the graph.
 
 Domain is in interval notation for ease of programming.
+
+Demo Footage
+https://www.youtube.com/watch?v=rPQ9V3vucVg
